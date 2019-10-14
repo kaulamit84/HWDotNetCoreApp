@@ -1,0 +1,2 @@
+# HWDotNetCoreApp
+Dot Net Core
