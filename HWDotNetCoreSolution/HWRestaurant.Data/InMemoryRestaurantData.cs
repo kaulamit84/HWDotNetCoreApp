@@ -16,8 +16,7 @@ namespace HWRestaurant.Data
             {
                 new Restaurant {id = 1, Name ="Domino", Location="Maryland", Cuisine=CuisineType.Chinese},
                 new Restaurant {id = 2, Name ="Cinnamon", Location="London", Cuisine=CuisineType.Indian},
-                new Restaurant {id = 3, Name ="La Costa", Location="California", Cuisine=CuisineType.Mexican},
-                new Restaurant {id = 4, Name ="Marriagnos", Location="Atlanta", Cuisine=CuisineType.Italian},
+                new Restaurant {id = 3, Name ="La Costa", Location="California", Cuisine=CuisineType.Mexican},                
             };
         }
 
@@ -43,6 +42,31 @@ namespace HWRestaurant.Data
         {
             return restaurants.SingleOrDefault(r => r.id == id);
         }
-       
+
+        public Restaurant Update(Restaurant updateRestaurant)
+        {
+            var restaurant =
+                restaurants.SingleOrDefault(r => r.id == updateRestaurant.id);
+                if(restaurant != null)
+                {
+                    restaurant.Name = updateRestaurant.Name;
+                    restaurant.Location = updateRestaurant.Location;
+                    restaurant.Cuisine = updateRestaurant.Cuisine;
+                }
+
+                return restaurant;
+        }
+
+        public int Commit()
+        {
+            return 0;
+        }
+
+        public Restaurant Add(Restaurant addRestaurant)
+        {
+            restaurants.Add(addRestaurant);
+            addRestaurant.id = restaurants.Max(r => r.id) + 1;
+            return addRestaurant;
+        }
     }
 }
