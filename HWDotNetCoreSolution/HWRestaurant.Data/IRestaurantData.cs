@@ -10,11 +10,13 @@ namespace HWRestaurant.Data
         IEnumerable<Restaurant> GetAll();
         IEnumerable<Restaurant> GetRestaurantsByName(string name);
         Restaurant GetById(int id);
-        Restaurant Update(Restaurant updateRestaurant);
-        int Commit();
+        Restaurant Update(Restaurant updateRestaurant);      
 
         //Add Restaurant
         Restaurant Add(Restaurant addRestaurant);
+
+        Restaurant Delete(int id);
+        int Commit();
 
     }
 }

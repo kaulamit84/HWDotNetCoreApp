@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HWRestaurant.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 //DI Part of Framework
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,17 @@ namespace HWRestaurant.Web
         public void ConfigureServices(IServiceCollection services)
         {
             //Register my data service
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();           
+            //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            services.AddScoped<IRestaurantData, SQLRestaurantData>();
+
+
+            //Register EF database and Options(connection string)
+            services.AddDbContextPool<RestaurantDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("HWRestaurantDb"));
+                
+            });
+
             services.AddRazorPages();            
         }
 
