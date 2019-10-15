@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HWRestaurant.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/glyphicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -42,7 +43,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - HWRestaurant.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <p>
+                @RenderSection("footer", required: false)
+                &copy; 2019 - HWRestaurant.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            </p>
         </div>
     </footer>
 
