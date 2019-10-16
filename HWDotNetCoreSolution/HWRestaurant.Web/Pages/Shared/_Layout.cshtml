@@ -18,7 +18,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">HWRestaurant.Web</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -50,11 +50,12 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            <p>
+        <div class="container align-content-lg-center">
+            <vc:restaurant-count></vc:restaurant-count>
+            @*<p>
                 @RenderSection("footer", required: false)
                 &copy; 2019 - HWRestaurant.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-            </p>
+            </p>*@
         </div>
     </footer>
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HWRestaurant.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 //DI Part of Framework
@@ -29,15 +30,16 @@ namespace HWRestaurant.Web
             //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
             services.AddScoped<IRestaurantData, SQLRestaurantData>();
 
-
             //Register EF database and Options(connection string)
             services.AddDbContextPool<RestaurantDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("HWRestaurantDb"));
-                
+                options.UseSqlServer(Configuration.GetConnectionString("HWRestaurantDb"));                
             });
 
-            services.AddRazorPages();            
+            services.AddRazorPages();        
+            
+            //MVC Request for API routing
+            services.AddMvc(option => option.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,10 +60,32 @@ namespace HWRestaurant.Web
 
             app.UseAuthorization();
 
+            //custom middleware call
+            app.Use(SayHelloMiddleware);
+
+            //use this for mvc routing
+            app.UseMvcWithDefaultRoute();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
+        }
+
+        //Custom Middleware
+        private RequestDelegate SayHelloMiddleware(RequestDelegate next)
+        {
+            return async ctx =>
+            {
+                if (ctx.Request.Path.StartsWithSegments("/hello"))
+                {
+                    await ctx.Response.WriteAsync("Hello World, This is custom middleware");
+                }
+                else
+                {
+                    await next(ctx);
+                }
+            };
         }
     }
 }

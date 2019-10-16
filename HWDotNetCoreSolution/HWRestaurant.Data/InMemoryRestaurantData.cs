@@ -73,5 +73,10 @@ namespace HWRestaurant.Data
         {
             throw new NotImplementedException();
         }
+
+        public int GetCountOfRestaurants()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

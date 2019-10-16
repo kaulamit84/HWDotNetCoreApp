@@ -7,6 +7,7 @@ using HWRestaurant.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace HWRestaurant.Web.Pages.Restaurants
 {
@@ -14,6 +15,7 @@ namespace HWRestaurant.Web.Pages.Restaurants
     {
         private readonly IConfiguration config;
         private readonly IRestaurantData restaurantData;
+        private readonly ILogger<ListModel> logger;
 
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
@@ -22,14 +24,20 @@ namespace HWRestaurant.Web.Pages.Restaurants
         public string Message { get; set; }
 
         //DI Injection
-        public ListModel(IConfiguration config, IRestaurantData restaurantData)
+        public ListModel(IConfiguration config, IRestaurantData restaurantData, ILogger<ListModel> logger)
         {
             this.config = config;
             this.restaurantData = restaurantData;
+            this.logger = logger;
         }
 
         public void OnGet()
         {
+            //Logger calls
+            logger.LogError("Something went wrong while executing Hexaware ListModel");
+            logger.LogInformation("Restaurants List");
+            logger.LogWarning("Get more restaurants");
+
             Message = config["Message"];
             //Restaurants = restaurantData.GetAll();
             Restaurants = restaurantData.GetRestaurantsByName(SearchTerm);

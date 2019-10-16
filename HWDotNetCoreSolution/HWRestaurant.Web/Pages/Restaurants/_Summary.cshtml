@@ -1,13 +1,13 @@
 ﻿@using HWRestaurant.Core
 @model Restaurant
 
-<div class="card">
+<div class="card mb-4 box-shadow" style="border-color: darkcyan">
     <div class="card-header">
         <h3>@Model.Name</h3>
     </div>
     <div class="card-body">
-        <span>Location: @Model.Location</span>
-        <span>Cuisine: @Model.Cuisine</span>
+        <span><strong>Location: </strong>@Model.Location</span>
+        <p><strong>Cuisine: </strong>@Model.Cuisine</p>
     </div>
     <div class="card-footer">
         <a class="btn btn-lg"

@@ -1,0 +1,30 @@
+﻿@page
+
+<h1>Calling Restaurant Api</h1>
+
+<table class="table" id="restaurants">
+
+</table>
+
+@section Scripts{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+    <script>
+        $(function () {
+            $.ajax("/api/restaurants/",
+                { method: "get" })
+                .then(function (response) {
+                    console.dir(response);
+                    $("#restaurants").dataTable({
+                        data: response,
+                        columns: [
+                            {"data": "name"},
+                            {"data": "location"},
+                            {"data": "cuisine"}
+                        ]
+                    });
+                });
+        });
+    </script>
+}
