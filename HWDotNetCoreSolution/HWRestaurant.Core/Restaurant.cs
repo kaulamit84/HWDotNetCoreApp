@@ -7,7 +7,6 @@ namespace HWRestaurant.Core
 {
     public class Restaurant
     {
-     
         public int id { get; set; }
 
         [Required, StringLength(80)]
